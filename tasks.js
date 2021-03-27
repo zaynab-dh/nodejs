@@ -88,7 +88,7 @@ function quit(){
  */
  function help(){
   var commands=[];  
-  commands.push("exit","quit","hello");
+  commands.push("exit: Allow user to quit the app\n" ,"quit: Allow user to quit the app\n","hello: when the user starts his command with hello it will return the same sentence with !");
   console.log(commands)
 }
 
