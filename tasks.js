@@ -50,6 +50,9 @@ function onDataReceived(text) {
   else if(text.split(" ",1) === 'add'){
     add(toDoList);
   }
+  else if(text.split(" ",1) === 'remove'){
+    remove(toDoList);
+  }
   else{
     unknownCommand(text);
   }
@@ -125,15 +128,29 @@ function quit(){
    }
    else
    {
-    
     l.push(n.slice(4));
    }
+}
+
+/**
+ * remove a task
+ *
+ * @returns {void}
+ */
+ function remove(l,p)
+ {
+   if (p === 'remove'){
+     l.splice(l.length-1,1);
+   }
+   else{
+     let rp = p.slice(7)-1;
+    l.splice(rp,1);
+   }
+   
    list(l);
 }
 
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
-add(['bread','potato'],'add cheese')
-help()
-
+remove(['a','b','c'],'remove 1');
