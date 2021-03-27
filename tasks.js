@@ -47,6 +47,9 @@ function onDataReceived(text) {
   else if(text === 'list\n'){
     list(toDoList);
   }
+  else if(text.split(" ",1) === 'add'){
+    add(toDoList);
+  }
   else{
     unknownCommand(text);
   }
@@ -109,9 +112,28 @@ function quit(){
   
 }
 
+/**
+ * add a task
+ *
+ * @returns {void}
+ */
+ function add(l,n)
+ {
+   if (n === 'add'|| n === 'add '){
+     console.log("error")
+     add.exit;
+   }
+   else
+   {
+    
+    l.push(n.slice(4));
+   }
+   list(l);
+}
+
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
-list(['bread','potato'])
+add(['bread','potato'],'add cheese')
 help()
 
