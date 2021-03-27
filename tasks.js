@@ -125,7 +125,7 @@ function quit(){
  {
    if (n === 'add'|| n === 'add '){
      console.log("error")
-     add.exit;
+     return
    }
    else
    {
@@ -145,13 +145,16 @@ function quit(){
    }
    else{
      let rp = p.slice(7)-1;
+     if (rp >= l.length-1)
+     {
+      console.log("this number does not exist");
+      return
+     }
     l.splice(rp,1);
    }
-   
-   list(l);
 }
 
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
-remove(['a','b','c'],'remove 1');
+
