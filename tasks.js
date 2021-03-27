@@ -98,7 +98,8 @@ function quit(){
  */
  function help(){
   var commands=[];  
-  commands.push("exit: Allow user to quit the app\n" ,"quit: Allow user to quit the app\n","hello: when the user starts his command with hello it will return the same sentence with !");
+  commands.push("exit: Allow user to quit the app\n" ,"quit: Allow user to quit the app\n","hello: when the user starts his command with hello it will return the same sentence with !",
+  "list: lists all tasks\n", "add: allows to add a task", "remove: allows to remove a task");
   console.log(commands)
 }
 
