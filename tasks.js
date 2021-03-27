@@ -34,6 +34,7 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
+  var toDoList = [];
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
@@ -42,6 +43,9 @@ function onDataReceived(text) {
   }
   else if(text === 'help\n'){
     help();
+  }
+  else if(text === 'list\n'){
+    list(toDoList);
   }
   else{
     unknownCommand(text);
@@ -92,9 +96,22 @@ function quit(){
   console.log(commands)
 }
 
+/**
+ * list all tasks
+ *
+ * @returns {void}
+ */
+ function list(l){
+  for (let i=1; i<= l.length; i++)
+  {
+    console.log(i + '- ' + l[i-1])
+  } 
+  
+}
+
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
-hello("hello batata")
+list(['bread','potato'])
 help()
 
