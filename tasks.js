@@ -37,7 +37,7 @@ function onDataReceived(text) {
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
-  else if(text === 'hello\n'){
+  else if(text.split(" ",1) === 'hello'){
     hello();
   }
   else if(text === 'help\n'){
@@ -66,8 +66,8 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(x){
+  console.log(x.trim() + '!')
 }
 
 
@@ -88,13 +88,13 @@ function quit(){
  */
  function help(){
   var commands=[];  
-  commands.push("exit","quit");
+  commands.push("exit","quit","hello");
   console.log(commands)
 }
 
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
-hello()
+hello("hello batata")
 help()
 
