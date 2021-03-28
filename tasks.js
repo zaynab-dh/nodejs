@@ -35,6 +35,7 @@ function startApp(name){
  */
 function onDataReceived(text) {
   var toDoList = [];
+  var done = [];
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
@@ -45,13 +46,22 @@ function onDataReceived(text) {
     help();
   }
   else if(text === 'list\n'){
-    list(toDoList);
+    list(toDoList,done);
   }
   else if(text.split(" ",1) === 'add'){
     add(toDoList);
   }
   else if(text.split(" ",1) === 'remove'){
     remove(toDoList);
+  }
+  else if(text.split(" ",1) === 'edit'){
+    edit(toDoList);
+  }
+  else if(text.split(" ",1) === 'check'){
+    check(toDoList);
+  }
+  else if(text.split(" ",1) === 'uncheck'){
+    uncheck(toDoList);
   }
   else{
     unknownCommand(text);
@@ -98,8 +108,8 @@ function quit(){
  */
  function help(){
   var commands=[];  
-  commands.push("exit: Allow user to quit the app\n" ,"quit: Allow user to quit the app\n","hello: when the user starts his command with hello it will return the same sentence with !",
-  "list: lists all tasks\n", "add: allows to add a task", "remove: allows to remove a task");
+  commands.push("exit: Allow user to quit the app\n" ,"quit: Allow user to quit the app\n","hello: when the user starts his command with hello it will return the same sentence with !\n",
+  "list: lists all tasks\n", "add: allows to add a task\n", "remove: allows to remove a task\n", "edit: edits a task\n", "check: changes task to done\n", "uncheck: changes task to undone");
   console.log(commands)
 }
 
@@ -108,10 +118,10 @@ function quit(){
  *
  * @returns {void}
  */
- function list(l){
+ function list(l,done){
   for (let i=1; i<= l.length; i++)
   {
-    console.log(i + '- ' + l[i-1])
+    console.log(i + ' - [' + done[i-1] + '] ' + l[i-1])
   } 
   
 }
@@ -154,7 +164,62 @@ function quit(){
    }
 }
 
+/**
+ * edit a task
+ *
+ * @returns {void}
+ */
+ function edit(l,e)
+ {
+   if ( e === 'edit'){
+    console.log("error")
+    return
+   }
+   else if (e.slice(5,6) <= l.length){
+    let pos = parseInt(e.slice(5,6));
+    l[pos -1]=e.slice(7);
+   }
+   else{
+      l[l.length-1]=e.slice(5);
+   } 
+}
+
+/**
+ * check a task
+ *
+ * @returns {void}
+ */
+ function check(l,d,done)
+ {
+    if (d.slice(5) <= l.length){
+      let dd = parseInt(d.slice(5));
+     done[dd-1] = "✓";
+   }
+   else{
+    console.log("error")
+    return
+   }
+}
+
+/**
+ * uncheck a task
+ *
+ * @returns {void}
+ */
+ function uncheck(l,u,done)
+ {
+   if (u.slice(7) <= l.length){
+    let dd = parseInt(u.slice(7));
+    done[dd-1] = " ";
+   }
+   else{
+    console.log("error")
+    return
+   }
+}
+
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
+
 
