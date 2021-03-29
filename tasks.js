@@ -204,7 +204,7 @@ function quit(){
  {
     if (d.slice(5) <= l.length){
       let dd = parseInt(d.slice(5));
-     done[dd-1] = "✓";
+     done[dd-1] = true;
    }
    else{
     console.log("error")
@@ -221,7 +221,7 @@ function quit(){
  {
    if (u.slice(7) <= l.length){
     let dd = parseInt(u.slice(7));
-    done[dd-1] = " ";
+    done[dd-1] = false;
    }
    else{
     console.log("error")
@@ -230,7 +230,7 @@ function quit(){
 }
 
 const fs = require ('fs');
-let data = JSON.stringify('./database.json');
+let data = JSON.stringify(toDoList);
 fs.writeFileSync('database.json',data);
 
 fs.readFileSync('database.json',(err,data)=>{
