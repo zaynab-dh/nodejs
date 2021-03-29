@@ -16,7 +16,8 @@ function startApp(name){
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
 }
-
+var toDoList = [];
+var done = [];
 
 /**
  * Decides what to do depending on the data that was received
@@ -35,13 +36,12 @@ function startApp(name){
  */
 function onDataReceived(text) {
   
-  var toDoList = [];
-  var done = [];
+  
   if (text.trim() === 'quit' || text.trim() === 'exit') {
     quit();
   }
   else if(text.trim() === 'hello'){
-    hello();
+    console.log('hello!');
   }
   else if(text.split(" ")[0] === 'hello'){
       console.log(text.trim() + '!');
@@ -52,19 +52,19 @@ function onDataReceived(text) {
   else if(text.trim() === 'list'){
     list(toDoList,done);
   }
-  else if(text.split(" ")[0] === 'add'){
+  else if(text.trim().split(" ")[0] === 'add'){
     add(toDoList,text);
   }
-  else if(text.split(" ")[0] === 'remove'){
+  else if(text.trim().split(" ")[0] === 'remove'){
     remove(toDoList,text);
   }
-  else if(text.split(" ")[0] === 'edit'){
+  else if(text.trim().split(" ")[0] === 'edit'){
     edit(toDoList,text);
   }
-  else if(text.split(" ")[0] === 'check'){
+  else if(text.trim().split(" ")[0] === 'check'){
     check(toDoList,text,done);
   }
-  else if(text.split(" ")[0] === 'uncheck'){
+  else if(text.trim().split(" ")[0] === 'uncheck'){
     uncheck(toDoList,text,done);
   }
   else{
@@ -125,9 +125,14 @@ function quit(){
  function list(l,done){
   for (let i=1; i<= l.length; i++)
   {
-    console.log(i + ' - [' + done[i-1] + '] ' + l[i-1])
-  } 
-  
+    if(done[i-1]===true){
+    console.log(i + ' [ ✓ ] ' + l[i-1]);
+  }else {
+    console.log(i + ' [  ] ' + l[i-1]);
+
+  }
+  }
+
 }
 
 /**
@@ -137,13 +142,15 @@ function quit(){
  */
  function add(l,n)
  {
-   if (n === 'add'|| n === 'add '){
-     console.log("error")
+   if (n.trim().split(" ")[1] == undefined){
+     console.log("error");
      return
    }
    else
    {
+
     l.push(n.slice(4));
+    done.push(false);
    }
 }
 
@@ -175,7 +182,7 @@ function quit(){
  */
  function edit(l,e)
  {
-   if ( e === 'edit'){
+   if (e.trim().split(" ")[1] == undefined){
     console.log("error")
     return
    }
@@ -242,6 +249,6 @@ console.log(process.argv);
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
-hello
+
 
 
