@@ -11,7 +11,7 @@
  */
 function startApp(name){
   process.stdin.resume();
-  process.stdin.setEncoding('utf8');
+  process.stdin.setEncoding('utf8'); 
   process.stdin.on('data', onDataReceived);
   console.log(`Welcome to ${name}'s application!`)
   console.log("--------------------")
@@ -34,34 +34,38 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
+  
   var toDoList = [];
   var done = [];
-  if (text === 'quit\n' || text === 'exit\n') {
+  if (text.trim() === 'quit' || text.trim() === 'exit') {
     quit();
   }
-  else if(text.split(" ",1) === 'hello'){
+  else if(text.trim() === 'hello'){
     hello();
   }
-  else if(text === 'help\n'){
+  else if(text.split(" ")[0] === 'hello'){
+      console.log(text.trim() + '!');
+  }
+  else if(text.trim() === 'help'){
     help();
   }
-  else if(text === 'list\n'){
+  else if(text.trim() === 'list'){
     list(toDoList,done);
   }
-  else if(text.split(" ",1) === 'add'){
-    add(toDoList);
+  else if(text.split(" ")[0] === 'add'){
+    add(toDoList,text);
   }
-  else if(text.split(" ",1) === 'remove'){
-    remove(toDoList);
+  else if(text.split(" ")[0] === 'remove'){
+    remove(toDoList,text);
   }
-  else if(text.split(" ",1) === 'edit'){
-    edit(toDoList);
+  else if(text.split(" ")[0] === 'edit'){
+    edit(toDoList,text);
   }
-  else if(text.split(" ",1) === 'check'){
-    check(toDoList);
+  else if(text.split(" ")[0] === 'check'){
+    check(toDoList,text,done);
   }
-  else if(text.split(" ",1) === 'uncheck'){
-    uncheck(toDoList);
+  else if(text.split(" ")[0] === 'uncheck'){
+    uncheck(toDoList,text,done);
   }
   else{
     unknownCommand(text);
@@ -81,14 +85,14 @@ function unknownCommand(c){
 }
 
 
-/**
- * Says hello
- *
- * @returns {void}
- */
-function hello(x){
-  console.log(x.trim() + '!')
-}
+// /**
+//  * Says hello
+//  *
+//  * @returns {void}
+//  */
+// function hello(x){
+//   console.log(x.trim() + '!')
+// }
 
 
 /**
@@ -108,8 +112,8 @@ function quit(){
  */
  function help(){
   var commands=[];  
-  commands.push("exit: Allow user to quit the app\n" ,"quit: Allow user to quit the app\n","hello: when the user starts his command with hello it will return the same sentence with !\n",
-  "list: lists all tasks\n", "add: allows to add a task\n", "remove: allows to remove a task\n", "edit: edits a task\n", "check: changes task to done\n", "uncheck: changes task to undone");
+  commands.push("exit: Allow user to quit the app" ,"quit: Allow user to quit the app","hello: when the user starts his command with hello it will return the same sentence with !",
+  "list: lists all tasks", "add: allows to add a task", "remove: allows to remove a task", "edit: edits a task", "check: changes task to done", "uncheck: changes task to undone");
   console.log(commands)
 }
 
@@ -218,8 +222,26 @@ function quit(){
    }
 }
 
+const fs = require ('fs');
+let data = JSON.stringify('./database.json');
+fs.writeFileSync('database.json',data);
+
+fs.readFileSync('database.json',(err,data)=>{
+  if (err) throw err;
+  let database = JSON.parse(data);
+  console.log(database);
+});
+
+const process = require('process');
+console.log(process.argv);
+
+
+
+
+
 
 // The following line starts the application
 startApp("Zaynab Dhaybi")
+
 
 

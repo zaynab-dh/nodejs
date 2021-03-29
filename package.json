@@ -1,0 +1,19 @@
+{
+  "name": "database.json",
+  "version": "1.0.0",
+  "description": "command-line-app",
+  "main": "tasks.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaynab-dh/nodejs.git"
+  },
+  "author": "zaynab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaynab-dh/nodejs/issues"
+  },
+  "homepage": "https://github.com/zaynab-dh/nodejs#readme"
+}
