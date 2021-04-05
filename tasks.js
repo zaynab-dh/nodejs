@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = "database.json";
 
 /**
  * Starts the application
@@ -10,6 +12,20 @@
  * @returns {void}
  */
 function startApp(name){
+
+  let arg = process.argv[2]
+
+  try{
+    const data = fs.readFileSync((arg)? arg : path);
+    toDoList = JSON.parse(data);
+
+  }catch(e){
+    console.log("error: make sure the file existed")
+    console.log("Exit...", e);
+    process.exit();
+  }
+
+
   process.stdin.resume();
   process.stdin.setEncoding('utf8'); 
   process.stdin.on('data', onDataReceived);
@@ -95,15 +111,7 @@ function unknownCommand(c){
 // }
 
 
-/**
- * Exits the application
- *
- * @returns {void}
- */
-function quit(){
-  console.log('Quitting now, goodbye!')
-  process.exit();
-}
+
 
 /**
  * lists all the possible commands
@@ -229,18 +237,25 @@ function quit(){
    }
 }
 
-const fs = require ('fs');
-let data = JSON.stringify(toDoList);
-fs.writeFileSync('database.json',data);
+/**
+ * Exits the application
+ *
+ * @returns {void}
+ */
+ function quit(){
+  let arg = process.argv[2]
+  try{
+    let data = JSON.stringify(todoList);
+    fs.writeFileSync((arg) ? arg : 'database.json',data);
 
-fs.readFileSync('database.json',(err,data)=>{
-  if (err) throw err;
-  let database = JSON.parse(data);
-  console.log(database);
-});
+  }catch(e){
+    console.log(e)
+  }
+  console.log('Quitting now, goodbye!')
+  process.exit();
+}
 
-const process = require('process');
-console.log(process.argv);
+
 
 
 
